@@ -29,13 +29,15 @@ knn.fit(csr_data)
 
 def get_movie_recommendation(movie_name):
     """
-    We first check if the movie_name input is in the database and if it is
-    we use our recommendation system to find similar movies and sort them
-    based on their similarity distance and output only the top 10 movies with
-    their distances from the input movie.
+    We first convert the input name to lower case to prevent ambiguity as the
+    dataset has movies in lower case and then  check if the movie_name input
+    is in the database and if it is we use our recommendation system to find
+    similar movies and sort them based on their similarity distance and output
+    only the top 10 movies with their distances from the input movie.
     """
     n_movies_to_recommend = 10
-    movie_list = movies[movies['title'].str.contains(movie_name)]
+    movie_name = str.lower(movie_name)
+    movie_list = movies[movies['title'].apply(str.lower).str.contains(movie_name)]
     if len(movie_list):
         movie_idx = movie_list.iloc[0]['movieId']
         movie_idx = final_dataset[final_dataset['movieId'] == movie_idx].index[0]
@@ -53,4 +55,4 @@ def get_movie_recommendation(movie_name):
         return "No movies found. Please check your input"
 
 
-print(get_movie_recommendation('Stuart Little'))
+print(get_movie_recommendation('stuArt Little'))
