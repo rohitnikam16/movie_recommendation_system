@@ -55,4 +55,4 @@ def get_movie_recommendation(movie_name):
         return "No movies found. Please check your input"
 
 
-print(get_movie_recommendation('stuArt Little'))
+print(get_movie_recommendation('Stuart Little'))
